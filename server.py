@@ -27,7 +27,8 @@ def recvall(sock, size):
         if not buffer:  # 받을 파일이 없을 경우
             # End of stream was found when unexpected.
             # raise EOFError('Could not receive all expected data!')
-            return bytes(message)  # 리턴
+            # return bytes(message)  # 리턴
+            break
 
         message.extend(buffer)  # message배열에 받은 버퍼 추가
     return bytes(message)  # message를 바이트단위로 리턴
@@ -66,7 +67,7 @@ def threaded(client_socket, addr):
                   ':', addr[1], 'data receive from ')
 
         except:
-            break
+            continue
 
     if client_socket in client_sockets:  # 클라이언트 종료될 경우 리스트에서 제거하고 출력함
         client_sockets.remove(client_socket)
