@@ -29,8 +29,7 @@ def recvall(sock, size):
         buffer = sock.recv(size - len(message))
         if not buffer:  # 받을 파일이 없을 경우
             # End of stream was found when unexpected.
-            # raise EOFError('Could not receive all expected data!')
-            return bytes(message)  # 리턴
+            break  # 데이터 없을 경우 리턴
 
         message.extend(buffer)  # message배열에 받은 버퍼 추가
     return bytes(message)  # message를 바이트단위로 리턴
